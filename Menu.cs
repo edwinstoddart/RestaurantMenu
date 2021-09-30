@@ -20,8 +20,25 @@ namespace RestaurantMenu
 
         public void AddItems(List<MenuItem> NewItems, DateTime CurrentDate)
         {
-            this.LastUpdate = CurrentDate;
-            
+            LastUpdate = CurrentDate;
+            for (int i = 0; i < NewItems.Count; i++)
+            {
+                menuItems.Add(NewItems[i]);
+            }
+        }
+
+        public void RemoveItem(int Index)
+        {
+            menuItems.RemoveAt(Index);
+        }
+
+        public void DisplayItems()
+        {
+            foreach (MenuItem Dish in menuItems)
+            {
+                Console.WriteLine($"Menu Number: {menuItems.IndexOf(Dish)}\n");
+                Dish.ReadInfo();
+            }
         }
     }
 }
