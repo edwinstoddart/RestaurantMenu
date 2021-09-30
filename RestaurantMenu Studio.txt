@@ -1,0 +1,18 @@
+Menu
+- private List<MenuItem> Dishes
+- private DateTime() LastUpdate
+	Methods:
+	- Constructor (List<MenuItem> Dishes, DateTime() CurrentDate)
+	- AddItems(List<MenuItem>, DateTime() CurrentDate)
+	- RemoveItems()
+
+MenuItem
+- private string Name
+- private double Price
+- private string Description
+- private string Category (appitizer, main course, dessert)
+- private bool NewItem
+	Methods:
+	- Constructor (string name, double price, string description, string category, bool true)
+	- CheckAddDate(DateTime() LastUpdate)
+	- ChangeSomething (dynamically select a dish and one of its values to change)
