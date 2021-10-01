@@ -8,13 +8,12 @@ namespace RestaurantMenu
 {
     class Menu
     {
-        public List<MenuItem> MenuItems { get { return menuItems; } set { menuItems = value; } }
-        private List<MenuItem> menuItems;
+        private List<MenuItem> _menuItems;
         private DateTime LastUpdate;
 
         public Menu(List<MenuItem> Dishes)
         {
-            menuItems = Dishes;
+            _menuItems = Dishes;
             LastUpdate = DateTime.Now;
         }
 
@@ -23,22 +22,46 @@ namespace RestaurantMenu
             LastUpdate = CurrentDate;
             for (int i = 0; i < NewItems.Count; i++)
             {
-                menuItems.Add(NewItems[i]);
+                _menuItems.Add(NewItems[i]);
             }
         }
 
         public void RemoveItem(int Index)
         {
-            menuItems.RemoveAt(Index);
+            _menuItems.RemoveAt(Index);
         }
 
-        public void DisplayItems()
+        public void DisplayAllItems()
         {
-            foreach (MenuItem Dish in menuItems)
+            foreach (MenuItem Dish in _menuItems)
             {
-                Console.WriteLine($"Menu Number: {menuItems.IndexOf(Dish)}\n");
+                Console.WriteLine($"Menu Number: {_menuItems.IndexOf(Dish)}\n");
                 Dish.ReadInfo();
             }
+        }
+
+        public IReadOnlyCollection<MenuItem> DisplayCourseItems(string Course)
+        {
+            Course = Course.ToLower();
+            List<MenuItem> CourseMenu = new List<MenuItem>();
+            switch (Course)
+            {
+                case "appetizer":
+                case "main course":
+                case "dessert":
+                    foreach (MenuItem Dish in _menuItems)
+                    {
+                        if (Course.Equals(Dish.Category))
+                        {
+                            CourseMenu.Add(Dish);
+                        }
+                    }
+                ; break;
+                default: Console.WriteLine("That is not a course at this restaurant."); break;
+            }
+
+            IReadOnlyCollection<MenuItem> DisplayCourse = CourseMenu.AsReadOnly();
+            return DisplayCourse;
         }
     }
 }

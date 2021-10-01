@@ -8,46 +8,41 @@ namespace RestaurantMenu
 {
     class MenuItem
     {
-        public string Name { get { return name; } set { name = value; } }
-        private string name;
-        public double Price { get { return price; } set { price = value; } }
-        private double price;
-        public string Description { get { return description; } set { description = value; } }
-        private string description;
-        public string Category { get { return category; } set { category = value; } }
-        private string category;
-        private DateTime AddDate;
-        public bool NewItem { get { return newItem; } set { newItem = value; } }
-        private bool newItem;
+        private string Name { get; set; }
+        private double Price { get; set; }
+        private string Description { get; set; }
+        public string Category { get; set; }
+        private bool NewItem { get; set; }
+        private DateTime _addDate;
 
-        public MenuItem(string Name, double Price, string Description,
-            string Category, bool NewItem = true)
+        public MenuItem(string name, double price, string description,
+            string category, bool newItem = true)
         {
-            name = Name;
-            price = Price;
-            description = Description;
-            category = Category;
-            AddDate = DateTime.Now;
-            newItem = NewItem;
+            Name = name;
+            Price = price;
+            Description = description;
+            Category = category;
+            NewItem = newItem;
+            _addDate = DateTime.Now;
         }
 
         public void CheckAddDate(DateTime LastUpdate)
         {
-            int CheckDate = DateTime.Compare(this.AddDate, LastUpdate);
+            int CheckDate = DateTime.Compare(this._addDate, LastUpdate);
             if (CheckDate < 0)
             {
-                newItem = false;
+                NewItem = false;
             } else {
-                newItem = true;
+                NewItem = true;
             }
         }
 
         public void ReadInfo()
         {
-            Console.WriteLine($"{name}\n" +
-                $"{price}\n" +
-                $"{description}\n" +
-                $"{(newItem ? "New!!": "")}");
+            Console.WriteLine($"{Name}\n" +
+                $"{Price}\n" +
+                $"{Description}\n" +
+                $"{(NewItem ? "New!!": "")}");
         }
     }
 }

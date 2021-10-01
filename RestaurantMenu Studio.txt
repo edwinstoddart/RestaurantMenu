@@ -1,18 +1,20 @@
 Menu
-- private List<MenuItem> Dishes
-- private DateTime() LastUpdate
+- public List<MenuItem> Dishes { get; set; }
+- public DateTime LastUpdate { get; set; }
 	Methods:
 	- Constructor (List<MenuItem> Dishes, DateTime() CurrentDate)
-	- AddItems(List<MenuItem>, DateTime() CurrentDate)
-	- RemoveItems()
+	- public void AddItems(List<MenuItem> NewItems, DateTime() CurrentDate)
+	- public void RemoveItem(int Index)
+	- public void DisplayItems()
 
 MenuItem
-- private string Name
-- private double Price
-- private string Description
-- private string Category (appitizer, main course, dessert)
-- private bool NewItem
+- public string Name { get; set; }
+- public double Price { get; set; }
+- public string Description { get; set; }
+- public string Category (appitizer, main course, dessert) { get; set; }
+- public DateTime AddDate { get; set; }
+- public bool NewItem { get; set; }
 	Methods:
 	- Constructor (string name, double price, string description, string category, bool true)
-	- CheckAddDate(DateTime() LastUpdate)
-	- ChangeSomething (dynamically select a dish and one of its values to change)
+	- public void CheckAddDate(DateTime() LastUpdate)
+	- public void ReadInfo() {displays the name, price, description, and whether it's a new item or not}
