@@ -17,17 +17,31 @@ namespace RestaurantMenu
             LastUpdate = DateTime.Now;
         }
 
-        public void AddItems(List<MenuItem> NewItems, DateTime CurrentDate)
+        public void AddItem(MenuItem NewItem, DateTime CurrentDate)
         {
+            int CheckCount = 0;
             LastUpdate = CurrentDate;
-            for (int i = 0; i < NewItems.Count; i++)
+
+            foreach (MenuItem item in _menuItems)
             {
-                _menuItems.Add(NewItems[i]);
+                item.CheckAddDate(LastUpdate);
+                if (!item.Equals(NewItem)) { CheckCount++; }
+            }
+
+            if (CheckCount == (_menuItems.Count))
+            {
+                _menuItems.Add(NewItem);
+                Console.WriteLine($"{NewItem.Name} has been added to the menu!!");
+            }
+            else
+            {
+                Console.WriteLine($"I'm sorry, {NewItem.Name} is already on the menu.");
             }
         }
 
         public void RemoveItem(int Index)
         {
+            Console.WriteLine($"{_menuItems[Index].Name} was removed.");
             _menuItems.RemoveAt(Index);
         }
 
@@ -35,9 +49,14 @@ namespace RestaurantMenu
         {
             foreach (MenuItem Dish in _menuItems)
             {
-                Console.WriteLine($"Menu Number: {_menuItems.IndexOf(Dish)}\n");
-                Dish.ReadInfo();
+                Console.WriteLine($"Menu Number: {_menuItems.IndexOf(Dish)}");
+                Console.WriteLine(Dish.ReadInfo());
             }
+        }
+
+        public void DisplaySingleItem(int Index)
+        {
+            Console.WriteLine(_menuItems[Index].ReadInfo());
         }
 
         public IReadOnlyCollection<MenuItem> DisplayCourseItems(string Course)

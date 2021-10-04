@@ -11,7 +11,7 @@ MenuItem
 - public string Name { get; set; }
 - public double Price { get; set; }
 - public string Description { get; set; }
-- public string Category (appitizer, main course, dessert) { get; set; }
+- public string Category (appetizer, main course, dessert) { get; set; }
 - public DateTime AddDate { get; set; }
 - public bool NewItem { get; set; }
 	Methods:

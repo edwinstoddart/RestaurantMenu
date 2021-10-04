@@ -8,7 +8,7 @@ namespace RestaurantMenu
 {
     class MenuItem
     {
-        private string Name { get; set; }
+        public string Name { get; set; }
         private double Price { get; set; }
         private string Description { get; set; }
         public string Category { get; set; }
@@ -28,7 +28,7 @@ namespace RestaurantMenu
 
         public void CheckAddDate(DateTime LastUpdate)
         {
-            int CheckDate = DateTime.Compare(this._addDate, LastUpdate);
+            int CheckDate = DateTime.Compare(_addDate, LastUpdate);
             if (CheckDate < 0)
             {
                 NewItem = false;
@@ -37,12 +37,20 @@ namespace RestaurantMenu
             }
         }
 
-        public void ReadInfo()
+        public string ReadInfo()
         {
-            Console.WriteLine($"{Name}\n" +
+            string Str = $"{Name}\n" +
                 $"{Price}\n" +
                 $"{Description}\n" +
-                $"{(NewItem ? "New!!": "")}");
+                $"{(NewItem ? "New!!": "")}\n";
+            return Str;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is MenuItem item &&
+                   Name == item.Name &&
+                   Category == item.Category;
         }
     }
 }
